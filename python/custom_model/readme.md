@@ -54,12 +54,34 @@ To run the logistic regression model:
 
 ## Abstract Model Requirements
 
-For implementing a logistic regression model, the essential components include:
+When saving a logistic regression model for future use, such as in a `.pickle` file, it's crucial to ensure the model exposes certain functionalities to enable both retraining and straightforward predictions. This ensures seamless integration and flexibility in various operational environments. The essential functions to be exposed are:
 
-- **Sigmoid Function:** Maps any real-valued number to the (0, 1) interval, essential for predicting probabilities.
-- **Cost Function:** Measures the performance of the model during training, guiding the gradient descent optimization.
-- **Gradient Descent:** Optimization algorithm used to minimize the cost function by iteratively adjusting the model's parameters (weights and bias).
-- **Prediction Threshold:** A probability threshold (commonly set to 0.5) used to classify predictions into binary classes.
+### `fit(self, X, y)`
+- **Purpose:** Retrain or update the model with new data. This function should take new feature matrices (`X`) and target vectors (`y`) to adjust the model's parameters based on additional data or to retrain from scratch.
+- **Parameters:**
+  - `X`: Feature matrix of the new data.
+  - `y`: Target vector corresponding to `X`.
 
-These components work together to enable the logistic regression model to learn from the training data and make accurate predictions.
+### `predict(self, X)`
+- **Purpose:** Make predictions using the trained model. Given a feature matrix (`X`), this function should return the predicted labels, allowing for the model's application in making decisions or further analyses.
+- **Parameters:**
+  - `X`: Feature matrix of the data for which predictions are desired.
+
+### `predict_proba(self, X)`
+- **Optional but Recommended:** Provides the probability estimates for each class, offering more detailed insight than binary predictions, especially in applications where understanding the confidence level of predictions is crucial.
+- **Parameters:**
+  - `X`: Feature matrix of the data for which probability estimates are desired.
+
+### `save(self, filepath)`
+- **Purpose:** Efficiently save the model to disk, using a format like pickle, for future use. This method encapsulates the serialization process, abstracting it away from the end user.
+- **Parameters:**
+  - `filepath`: Destination path where the model should be saved.
+
+### `load(filepath)`
+- **Purpose:** Static method to load a previously saved model. This function ensures that a model can be quickly reloaded without needing to retrain from scratch, facilitating ease of use in production environments.
+- **Parameters:**
+  - `filepath`: Path to the saved model file.
+
+Ensuring these functions are well-defined and accessible in the logistic regression model's class definition will enable users to seamlessly transition between training, prediction, and retraining phases, enhancing the model's utility and flexibility.
+
 
