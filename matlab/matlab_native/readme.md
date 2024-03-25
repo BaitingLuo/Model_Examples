@@ -15,15 +15,17 @@ This project involves a MATLAB script designed to classify iris flowers into the
 
 The Iris dataset is downloaded from the UCI Machine Learning Repository and saved locally.
 
-
+```matlab
 % Download the dataset and save it to a local file
 dataURL = 'https://archive.ics.uci.edu/ml/machine-learning-databases/iris/iris.data';
 localFilePath = 'iris.data';
 websave(localFilePath, dataURL);
+```
 
 ### Step 2: Load and Preprocess the Data
 
 The data is loaded from the local file, and preprocessing involves extracting features and converting labels into binary format.
+```matlab
 % Load and preprocess the data from the local file
 fileID = fopen(localFilePath, 'r');
 if fileID == -1
@@ -34,13 +36,18 @@ fclose(fileID);
 features = cell2mat(dataCell(1:4));
 labels = dataCell{5};
 binaryLabels = double(strcmp(labels, 'Iris-versicolor'));
+```
 
 ### Step 3: Train the Model
 A logistic regression model is trained using the preprocessed features and labels.
+```matlab
 % Train the model
 mdl = fitclinear(features, binaryLabels, 'Learner', 'logistic');
+```
 
 ### Step 4: Save the Trained Model
 The trained logistic regression model is saved to a file for future use.
+```matlab
 % Save the trained model
 save('logisticRegressionModel.mat', 'mdl');
+```
