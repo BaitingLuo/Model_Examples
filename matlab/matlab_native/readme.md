@@ -15,13 +15,14 @@ This project involves a MATLAB script designed to classify iris flowers into the
 
 The Iris dataset is downloaded from the UCI Machine Learning Repository and saved locally.
 
-```matlab
+
 % Download the dataset and save it to a local file
 dataURL = 'https://archive.ics.uci.edu/ml/machine-learning-databases/iris/iris.data';
 localFilePath = 'iris.data';
 websave(localFilePath, dataURL);
 
 ### Step 2: Load and Preprocess the Data
+
 The data is loaded from the local file, and preprocessing involves extracting features and converting labels into binary format.
 % Load and preprocess the data from the local file
 fileID = fopen(localFilePath, 'r');
